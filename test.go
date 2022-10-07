@@ -15,12 +15,12 @@ func (l *seelogger) Write(message []byte) (int, error) {
 }
 
 func main() {
-	engine, err := xorm.NewEngine("sqlite3", "./example.db")
+	engine, err := xorm.NewEngine("sqlite3", "./example.db?cache=shared")
 	if err != nil {
 		panic(err)
 	}
 	engine.SetLogger(log.NewSimpleLogger2(&seelogger{}, "[xorm]", 0))
-
+	seelog.Debugf("###")
 	// fmt.Println(db.Ping())
 	if err := engine.Ping(); err != nil {
 		panic(err)
